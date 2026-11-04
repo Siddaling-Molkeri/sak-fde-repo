@@ -32,7 +32,7 @@ jobs:
     # Gitleaks reads the whole Git history, not only the files of this pull request (DEP-06).
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@<ACTIONS_CHECKOUT_SHA>      # release tag of this commit
+      - uses: actions/checkout@V1      # release tag of this commit
         with:
           fetch-depth: 0                 # fetch every commit so the scan sees the full history
       - run: >-
