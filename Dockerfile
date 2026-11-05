@@ -13,10 +13,10 @@
 
 # ---------------------------------------------------------------- stage 1: build
 # A "multi-stage" build keeps build tools out of the final image (CTR-01).
-FROM python:<PYTHON_IMAGE_TAG>@sha256:<PYTHON_IMAGE_DIGEST> AS builder
+FROM python:slim@sha256:f0aecb335180611a3a000c45def529ec8ee768d5d26ff24bae4dfb70594a9121 AS builder
 
 # Copy the uv program from its official image instead of installing it with pip.
-COPY --from=ghcr.io/astral-sh/uv:<UV_IMAGE_TAG> /uv /bin/uv
+COPY --from=ghcr.io/astral-sh/uv:0.13.6 /uv /bin/uv
 
 WORKDIR /build
 
@@ -29,7 +29,7 @@ COPY pyproject.toml uv.lock ./
 RUN uv sync --locked --no-dev --no-install-project
 
 # ---------------------------------------------------------------- stage 2: run
-FROM python:<PYTHON_IMAGE_TAG>@sha256:<PYTHON_IMAGE_DIGEST> AS runtime
+FROM python:slim@sha256:f0aecb335180611a3a000c45def529ec8ee768d5d26ff24bae4dfb70594a9121 AS runtime
 
 # Run as a normal user with a fixed ID, never as root (CTR-02).
 RUN useradd --create-home --uid 1000 --shell /bin/sh appuser
