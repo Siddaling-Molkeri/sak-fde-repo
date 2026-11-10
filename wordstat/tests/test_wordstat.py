@@ -1,6 +1,6 @@
 import pytest
 
-from wordstat import count_words, get_top_words
+from wordstat.wordstat import count_words, get_top_words
 
 
 def test_basic_word_count():
