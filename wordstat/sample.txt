@@ -1,0 +1,4 @@
+Python is great.
+Python is powerful.
+Python makes programming fun.
+Programming with Python is great.
